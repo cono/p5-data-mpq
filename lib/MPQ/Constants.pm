@@ -3,7 +3,7 @@ package MPQ::Constants;
 use strict;
 use warnings;
 
-our @EXPORT_OK = qw/ MAGIC /;
+our @EXPORT_OK = qw/ MAGIC ARCHIVE_TYPE SHUNT_TYPE /;
 
 sub import {
     my $caller = caller;
@@ -19,7 +19,9 @@ sub import {
     }
 }
 
-sub MAGIC() { 'MPQ' }
+sub MAGIC()        { 'MPQ' }
+sub ARCHIVE_TYPE() { "\x1a" }
+sub SHUNT_TYPE()   { "\x1b" }
 
 1;
 

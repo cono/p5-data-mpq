@@ -8,9 +8,6 @@ use MPQ::Constants;
 use MPQ::Archive;
 use MPQ::Shunt;
 
-sub ARCHIVE_TYPE() { "\x1a" }
-sub SHUNT_TYPE()   { "\x1b" }
-
 sub new {
     my ($class, %param) = @_;
 

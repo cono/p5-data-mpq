@@ -35,11 +35,32 @@ sub read_str {
     return $buf;
 }
 
+sub read_int64 {
+    my $self = shift;
+    my $str = $self->read_str(8);
+
+    return unpack("Q", $str);
+}
+
 sub read_int32 {
     my $self = shift;
     my $str = $self->read_str(4);
 
     return unpack("V", $str);
+}
+
+sub read_int16 {
+    my $self = shift;
+    my $str = $self->read_str(2);
+
+    return unpack("v", $str);
+}
+
+sub read_int8 {
+    my $self = shift;
+    my $str = $self->read_str(1);
+
+    return unpack("C", $str);
 }
 
 sub DESTROY {
