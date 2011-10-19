@@ -3,20 +3,24 @@ package MPQ::Crypt;
 use strict;
 use warnings;
 
-use MPQ::Constants;
+use MPQ::Constants qw/ KEY_HASH_TABLE KEY_BLOCK_TABLE DECRYPT_BLOCK_OFFSET/;
 
 sub CRYPT_BUFFER_SIZE() { 0x500 }
 sub INIT_SEED()         { 0x00100001 }
 sub HASH_STRING_SEED1() { 0x7FED7FED }
 sub HASH_STRING_SEED2() { 0xEEEEEEEE }
 
+my $_singleton;
+
 sub new {
+    return $_singleton if $_singleton;
+
     my ($class, %param) = @_;
-    my $self = bless(\%param, $class);
+    my $_singleton = bless(\%param, $class);
 
-    $self->_init;
+    $_singleton->_init;
 
-    return $self;
+    return $_singleton;
 }
 
 sub _to_dword {
@@ -54,6 +58,38 @@ sub hash_string {
     }
 
     return $seed1;
+}
+
+sub decrypt_table {
+    my ($self, $file, $length, $seed1) = @_;
+    my $seed2 = HASH_STRING_SEED2;
+    my ($word, $temp);
+    my $result = [];
+
+    while ($length--) {
+        my $word = $file->read_int32;
+        $seed2 = _to_dword( $seed2 + $self->{'_buffer'}->[DECRYPT_BLOCK_OFFSET + ($seed1 & 0xFF)]);
+        $temp = $word ^ _to_dword( $seed1 + $seed2 );
+
+        $seed1 = _to_dword( ((~$seed1 << 0x15) + 0x1111_1111) | ($seed1 >> 0x0B) );
+        $seed2 = _to_dword( $temp + $seed2 + ($seed2 << 5) + 3 );
+
+        push @$result, $temp;
+    }
+
+    return $result;
+}
+
+sub decrypt_block_table {
+    my $self = shift;
+
+    return $self->decrypt_table(@_, KEY_BLOCK_TABLE);
+}
+
+sub decrypt_hash_table {
+    my $self = shift;
+
+    return $self->decrypt_table(@_, KEY_HASH_TABLE);
 }
 
 1;

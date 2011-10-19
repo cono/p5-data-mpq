@@ -5,6 +5,8 @@ use warnings;
 
 use MPQ::Constants;
 use MPQ::Archive::Header;
+use MPQ::Archive::HashTable;
+use MPQ::Archive::BlockTable;
 
 sub new {
     my ($class, %param) = @_;
@@ -23,9 +25,24 @@ sub parse {
         offset => $self->{'file'}->tell
     );
     $self->{'_header'}->parse;
+
+    $self->{'_hash_table'} = MPQ::Archive::HashTable->new(
+        file   => $self->{'file'},
+        offset => $self->{'_header'}->hash_table_offset + $self->{'offset'}
+    );
+    $self->{'_hash_table'}->parse;
+
+    $self->{'_block_table'} = MPQ::Archive::BlockTable->new(
+        file    => $self->{'file'},
+        offset  => $self->{'_header'}->block_table_offset + $self->{'offset'},
+        entries => $self->{'_header'}->block_table_entries
+    );
+    $self->{'_block_table'}->parse;
 }
 
 sub header { $_[0]->{'_header'} }
+sub hash_table { $_[0]->{'_hash_table'} }
+sub block_table { $_[0]->{'_block_table'} }
 
 sub do_magic {
     my $self = shift;

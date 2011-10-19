@@ -1,0 +1,734 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="generator" content="MediaWiki 1.13.4" />
+		<meta name="robots" content="noindex,follow" />
+		<meta name="keywords" content="The MoPaQ Archive Format" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="search" type="application/opensearchdescription+xml" href="/opensearch_desc.php" title="/dev/klog Wiki (en)" />
+		<link title="Creative Commons" type="application/rdf+xml" href="/index.php?title=The_MoPaQ_Archive_Format&amp;action=creativecommons" rel="meta" />
+		<link rel="copyright" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
+		<link rel="alternate" type="application/rss+xml" title="/dev/klog Wiki RSS Feed" href="http://wiki.devklog.net/index.php?title=Special:RecentChanges&amp;feed=rss" />
+		<link rel="alternate" type="application/atom+xml" title="/dev/klog Wiki Atom Feed" href="http://wiki.devklog.net/index.php?title=Special:RecentChanges&amp;feed=atom" />
+		<title>The MoPaQ Archive Format - /dev/klog Wiki</title>
+		<style type="text/css" media="screen, projection">/*<![CDATA[*/
+			@import "/skins/common/shared.css?164";
+			@import "/skins/monobook/main.css?164";
+		/*]]>*/</style>
+		<link rel="stylesheet" type="text/css"  href="/skins/common/commonPrint.css?164" />
+		<!--[if lt IE 5.5000]><style type="text/css">@import "/skins/monobook/IE50Fixes.css?164";</style><![endif]-->
+		<!--[if IE 5.5000]><style type="text/css">@import "/skins/monobook/IE55Fixes.css?164";</style><![endif]-->
+		<!--[if IE 6]><style type="text/css">@import "/skins/monobook/IE60Fixes.css?164";</style><![endif]-->
+		<!--[if IE 7]><style type="text/css">@import "/skins/monobook/IE70Fixes.css?164";</style><![endif]-->
+		<!--[if lt IE 7]><script type="text/javascript" src="/skins/common/IEFixes.js?164"></script>
+		<meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+		
+		<script type= "text/javascript">/*<![CDATA[*/
+var skin = "monobook";
+var stylepath = "/skins";
+var wgArticlePath = "/index.php?title=$1";
+var wgScriptPath = "";
+var wgScript = "/index.php";
+var wgVariantArticlePath = false;
+var wgActionPaths = [];
+var wgServer = "http://wiki.devklog.net";
+var wgCanonicalNamespace = "";
+var wgCanonicalSpecialPageName = false;
+var wgNamespaceNumber = 0;
+var wgPageName = "The_MoPaQ_Archive_Format";
+var wgTitle = "The MoPaQ Archive Format";
+var wgAction = "view";
+var wgArticleId = "4";
+var wgIsArticle = true;
+var wgUserName = null;
+var wgUserGroups = null;
+var wgUserLanguage = "en";
+var wgContentLanguage = "en";
+var wgBreakFrames = false;
+var wgCurRevisionId = "420";
+var wgVersion = "1.13.4";
+var wgEnableAPI = true;
+var wgEnableWriteAPI = false;
+var wgRestrictionEdit = [];
+var wgRestrictionMove = [];
+/*]]>*/</script>
+                
+		<script type="text/javascript" src="/skins/common/wikibits.js?164"><!-- wikibits js --></script>
+		<!-- Head Scripts -->
+		<script type="text/javascript" src="/skins/common/ajax.js?164"></script>
+		<script type="text/javascript" src="/index.php?title=-&amp;action=raw&amp;gen=js&amp;useskin=monobook"><!-- site js --></script>
+		<style type="text/css">/*<![CDATA[*/
+@import "/index.php?title=MediaWiki:Common.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+@import "/index.php?title=MediaWiki:Monobook.css&usemsgcache=yes&action=raw&ctype=text/css&smaxage=18000";
+@import "/index.php?title=-&action=raw&gen=css&maxage=18000&useskin=monobook";
+/*]]>*/</style>
+	</head>
+<body class="mediawiki ns-0 ltr page-The_MoPaQ_Archive_Format">
+	<div id="globalWrapper">
+		<div id="column-content">
+	<div id="content">
+		<a name="top" id="top"></a>
+				<h1 class="firstHeading">The MoPaQ Archive Format</h1>
+		<div id="bodyContent">
+			<h3 id="siteSub">From /dev/klog Wiki</h3>
+			<div id="contentSub"></div>
+									<div id="jump-to-nav">Jump to: <a href="#column-one">navigation</a>, <a href="#searchInput">search</a></div>			<!-- start content -->
+			<p>© 2006-2010 Justin Olbrantz (Quantam) and Jean-Francois Roy (BahamutZERO). All Rights Reserved.
+</p><p>Distribution and reproduction of this specification are allowed without limitation, as long as it is not altered; however, linking to this authoritative copy is preferrable, to ensure that everyone has access to the most recent version. Quotation in other works is freely allowed, as long as the source and author of the quote are stated.
+</p>
+<table id="toc" class="toc" summary="Contents"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1"><a href="#Introduction_to_the_MoPaQ_Format"><span class="tocnumber">1</span> <span class="toctext">Introduction to the MoPaQ Format</span></a></li>
+<li class="toclevel-1"><a href="#The_MoPaQ_Format"><span class="tocnumber">2</span> <span class="toctext">The MoPaQ Format</span></a>
+<ul>
+<li class="toclevel-2"><a href="#General_Archive_Layout"><span class="tocnumber">2.1</span> <span class="toctext">General Archive Layout</span></a></li>
+<li class="toclevel-2"><a href="#Archive_Header"><span class="tocnumber">2.2</span> <span class="toctext">Archive Header</span></a></li>
+<li class="toclevel-2"><a href="#Block_Table"><span class="tocnumber">2.3</span> <span class="toctext">Block Table</span></a></li>
+<li class="toclevel-2"><a href="#Extended_Block_Table"><span class="tocnumber">2.4</span> <span class="toctext">Extended Block Table</span></a></li>
+<li class="toclevel-2"><a href="#Hash_Table"><span class="tocnumber">2.5</span> <span class="toctext">Hash Table</span></a></li>
+<li class="toclevel-2"><a href="#Extended_Attributes"><span class="tocnumber">2.6</span> <span class="toctext">Extended Attributes</span></a></li>
+<li class="toclevel-2"><a href="#File_Data"><span class="tocnumber">2.7</span> <span class="toctext">File Data</span></a></li>
+<li class="toclevel-2"><a href="#Listfile"><span class="tocnumber">2.8</span> <span class="toctext">Listfile</span></a></li>
+<li class="toclevel-2"><a href="#Weak_Digital_Signature"><span class="tocnumber">2.9</span> <span class="toctext">Weak Digital Signature</span></a></li>
+<li class="toclevel-2"><a href="#Strong_Digital_Signature_-_Generics"><span class="tocnumber">2.10</span> <span class="toctext">Strong Digital Signature - Generics</span></a></li>
+<li class="toclevel-2"><a href="#Strong_Digital_Signature_-_Specifics"><span class="tocnumber">2.11</span> <span class="toctext">Strong Digital Signature - Specifics</span></a></li>
+<li class="toclevel-2"><a href="#User_Data"><span class="tocnumber">2.12</span> <span class="toctext">User Data</span></a>
+<ul>
+<li class="toclevel-3"><a href="#User_Data_File"><span class="tocnumber">2.12.1</span> <span class="toctext">User Data File</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Algorithm_Source_Code"><span class="tocnumber">3</span> <span class="toctext">Algorithm Source Code</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Encryption.2FDecryption"><span class="tocnumber">3.1</span> <span class="toctext">Encryption/Decryption</span></a></li>
+<li class="toclevel-2"><a href="#Hashing_And_File_Key_Computation"><span class="tocnumber">3.2</span> <span class="toctext">Hashing And File Key Computation</span></a></li>
+<li class="toclevel-2"><a href="#Conversion_of_FILETIME_And_time_t"><span class="tocnumber">3.3</span> <span class="toctext">Conversion of FILETIME And time_t</span></a></li>
+<li class="toclevel-2"><a href="#Conversion_of_FILETIME_And_NSDate"><span class="tocnumber">3.4</span> <span class="toctext">Conversion of FILETIME And NSDate</span></a></li>
+<li class="toclevel-2"><a href="#Forming_a_64-Bit_Large_Archive_Offset_From_32-Bit_And_16-Bit_Components"><span class="tocnumber">3.5</span> <span class="toctext">Forming a 64-Bit Large Archive Offset From 32-Bit And 16-Bit Components</span></a></li>
+<li class="toclevel-2"><a href="#Verifying_a_Sector_Checksum"><span class="tocnumber">3.6</span> <span class="toctext">Verifying a Sector Checksum</span></a></li>
+<li class="toclevel-2"><a href="#Finding_Files"><span class="tocnumber">3.7</span> <span class="toctext">Finding Files</span></a></li>
+<li class="toclevel-2"><a href="#Deleting_Files"><span class="tocnumber">3.8</span> <span class="toctext">Deleting Files</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1"><a href="#Constants"><span class="tocnumber">4</span> <span class="toctext">Constants</span></a>
+<ul>
+<li class="toclevel-2"><a href="#Locales"><span class="tocnumber">4.1</span> <span class="toctext">Locales</span></a></li>
+</ul>
+</li>
+</ul>
+</td></tr></table><script type="text/javascript"> if (window.showTocToggle) { var tocShowText = "show"; var tocHideText = "hide"; showTocToggle(); } </script>
+<a name="Introduction_to_the_MoPaQ_Format"></a><h2> <span class="mw-headline"> Introduction to the MoPaQ Format </span></h2>
+<p>The MoPaQ (or MPQ) format is an archive file format designed by Mike O'Brien (hence the name Mike O'brien PaCK) at Blizzard Entertainment. The format has been used in all Blizzard games since (and including) Diablo. It is heavily optimized to be a read-only game archive format, and excels at this role. 
+</p><p>The Blizzard MoPaQ-reading functions are contained in the Storm module, which my be either statically or dynamically linked. Traditionally, the Blizzard MoPaQ-writing functions are contained in the MPQAPI module, which is always statically linked; in Starcraft 2, however, the MoPaQ-writing functions are now contained in Storm.
+</p><p>StormLib - mentioned several times in this specification - is an open-source MoPaQ reading and writing library written by Ladislav Zezula (no affiliation with Blizzard Entertainment). While it's a bit dated, and does not support all of the newer MoPaQ features, it contains source code to the more exotic compression methods used by MoPaQ, such as the PKWare implode algorithm, MoPaQ's huffman compression algorithm, and the IMA ADPCM compression used by MoPaQ.
+</p>
+<a name="The_MoPaQ_Format"></a><h2> <span class="mw-headline"> The MoPaQ Format </span></h2>
+<p>All numbers in the MoPaQ format are in little endian byte order; signed numbers use the two's complement system. Data types are listed either as int (integer, the number of bits specified), byte (8 bits), or char (bytes which contain ASCII characters). All sizes and offsets are in bytes, unless specified otherwise. Structure members are listed in the following general form:
+offset from the beginning of the structure: data type(array size) member name&nbsp;: member description
+</p>
+<a name="General_Archive_Layout"></a><h3> <span class="mw-headline"> General Archive Layout </span></h3>
+<ul><li> Archive Header
+</li><li> File Data
+</li><li> File Data - Special Files
+</li><li> Hash Table
+</li><li> Block Table
+</li><li> Extended Block Table
+</li><li> Strong Digital signature
+</li></ul>
+<p>This is the usual archive layout, but it is not mandatory. Some archives have been observed placing the hash table and file table after the archive header, and before the file data.
+</p><p>However, beginning with Starcraft 2, the block table must immediately follow the hash table.
+</p>
+<a name="Archive_Header"></a><h3> <span class="mw-headline"> Archive Header </span></h3>
+<pre>
+00h: char(4) Magic             Indicates that the file is a MoPaQ archive. Must be ASCII &quot;MPQ&quot; 1Ah.
+04h: int32 HeaderSize          Size of the archive header.
+08h: int32 ArchiveSize         Size of the whole archive, including the header. Does not include the strong digital signature, 
+                               if present. This size is used, among other things, for determining the region to hash in computing 
+                               the digital signature. This field is deprecated in the Burning Crusade MoPaQ format, and the size 
+                               of the archive is calculated as the size from the beginning of the archive to the end of the 
+                               hash table, block table, or extended block table (whichever is largest).
+0Ch: int16 FormatVersion       MoPaQ format version. MPQAPI will not open archives where this is negative. Known versions:
+	0000h                  Original format. HeaderSize should be 20h, and large archives are not supported.
+	0001h                  Burning Crusade format. Header size should be 2Ch, and large archives are supported.
+0Eh: int8 SectorSizeShift      Power of two exponent specifying the number of 512-byte disk sectors in each logical sector 
+                               in the archive. The size of each logical sector in the archive is 512 * 2^SectorSizeShift. 
+                               Bugs in the Storm library dictate that this should always be 3 (4096 byte sectors).
+10h: int32 HashTableOffset     Offset to the beginning of the hash table, relative to the beginning of the archive.
+14h: int32 BlockTableOffset    Offset to the beginning of the block table, relative to the beginning of the archive.
+18h: int32 HashTableEntries    Number of entries in the hash table. Must be a power of two, and must be less than 2^16 
+                               for the original MoPaQ format, or less than 2^20 for the Burning Crusade format.
+1Ch: int32 BlockTableEntries   Number of entries in the block table.
+
+Fields only present in the Burning Crusade format and later:
+
+20h: int64 ExtendedBlockTableOffset   Offset to the beginning of the extended block table, relative to the beginning of the archive.
+28h: int16 HashTableOffsetHigh        High 16 bits of the hash table offset for large archives.
+2Ah: int16 BlockTableOffsetHigh       High 16 bits of the block table offset for large archives.
+</pre>
+<p>The archive header is the first structure in the archive, at archive offset 0; however, the archive does not need to be at offset 0 of the containing file. The offset of the archive in the file is referred to here as ArchiveOffset. If the archive is not at the beginning of the file, it must begin at a disk sector boundary (512 bytes). Early versions of Storm require that the archive be at the end of the containing file (ArchiveOffset + ArchiveSize = file size), but this is not required in newer versions (due to the strong digital signature not being considered a part of the archive).
+</p>
+<a name="Block_Table"></a><h3> <span class="mw-headline"> Block Table </span></h3>
+<p>The block table contains entries for each region in the archive. Regions may be either files, empty space, which may be overwritten by new files (typically this space is from deleted file data), or unused block table entries. Empty space entries should have BlockOffset and BlockSize nonzero, and FileSize and Flags zero; unused block table entries should have BlockSize, FileSize, and Flags zero. The block table is encrypted, using the hash of "(block table)" as the key. Each entry is structured as follows:
+</p>
+<pre>
+00h: int32 BlockOffset   Offset of the beginning of the block, relative to the beginning of the archive.
+04h: int32 BlockSize     Size of the block in the archive.
+08h: int32 FileSize      Size of the file data stored in the block. Only valid if the block is a file; otherwise 
+                         meaningless, and should be 0. If the file is compressed, this is the size of the uncompressed 
+                         file data.
+0Ch: int32 Flags         Bit mask of the flags for the block. The following values are conclusively identified:
+	80000000h        Block is a file, and follows the file data format; otherwise, block is free space or unused. 
+                         If the block is not a file, all other flags should be cleared, and FileSize should be 0.
+	04000000h	 File has checksums for each sector (explained in the File Data section). Ignored if file is not
+                         compressed or imploded.
+        02000000h        File is a deletion marker, indicating that the file no longer exists. This is used to allow
+                         patch archives to delete files present in lower-priority archives in the search chain.
+	01000000h        File is stored as a single unit, rather than split into sectors.
+	00020000h        The file's encryption key is adjusted by the block offset and file size (explained in detail in the 
+                         File Data section). File must be encrypted.
+	00010000h        File is encrypted.
+	00000200h        File is compressed. File cannot be imploded.
+	00000100h        File is imploded. File cannot be compressed.
+</pre>
+<a name="Extended_Block_Table"></a><h3> <span class="mw-headline"> Extended Block Table </span></h3>
+<p>The extended block table was added to support archives larger than 4 gigabytes (2^32 bytes). The table contains the upper bits of the archive offsets for each block in the block table. It is simply an array of int16s, which become bits 32-47 of the archive offsets for each block, with bits 48-63 being zero. Individual blocks in the archive are still limited to 4 gigabytes in size. This table is only present in Burning Crusade format archives that exceed 4 gigabytes size.
+</p><p>Unlike the hash and block tables, the extended block table is not encrypted nor compressed.
+</p>
+<a name="Hash_Table"></a><h3> <span class="mw-headline"> Hash Table </span></h3>
+<p>Instead of storing file names, for quick access MoPaQs use a fixed, power of two-size hash table of files in the archive. A file is uniquely identified by its file path, its language, and its platform.
+</p><p>The home entry for a file in the hash table is computed as a hash of the file path. In the event of a collision (the home entry is occupied by another file), progressive overflow is used, and the file is placed in the next available hash table entry. Searches for a desired file in the hash table proceed from the home entry for the file until either the file is found, the entire hash table is searched, or an empty hash table entry (FileBlockIndex of FFFFFFFFh) is encountered. 
+</p><p>The hash table is always encrypted, using the hash of "(hash table)" as the key.
+</p><p>Prior to Starcraft 2, the hash table is stored uncompressed. In Starcraft 2, however, the table may optionally be compressed. If the offset of the block table is not equal to the offset of the hash table plus the uncompressed size, Starcraft 2 interprets the hash table as being compressed (not imploded). This calculation assumes that the block table immediately follows the hash table, and will fail or crash otherwise.
+</p><p>Each entry is structured as follows:
+</p>
+<pre>
+00h: int32 FilePathHashA    The hash of the file path, using method A.
+04h: int32 FilePathHashB    The hash of the file path, using method B.
+08h: int16 Language         The language of the file. This is a Windows LANGID data type, and uses the same values. 
+                            0 indicates the default language (American English), or that the file is language-neutral.
+0Ah: int8 Platform          The platform the file is used for. 0 indicates the default platform. No other values 
+                            have been observed.
+0Ch: int32 FileBlockIndex   If the hash table entry is valid, this is the index into the block table of the file. 
+                            Otherwise, one of the following two values:
+	FFFFFFFFh           Hash table entry is empty, and has always been empty. Terminates searches for a given file.
+	FFFFFFFEh           Hash table entry is empty, but was valid at some point (in other words, the file was deleted). 
+                            Does not terminate searches for a given file.
+</pre>
+<a name="Extended_Attributes"></a><h3> <span class="mw-headline"> Extended Attributes </span></h3>
+<p>The extended attributes are optional file attributes for files in the block table. These attributes were added at times after the MoPaQ format was already finalized, and it is not necessary for every archive to have all (or any) of the extended attributes. If an archive contains a given attribute, there will be an instance of that attribute for every block in the block table, although the attribute will be meaningless if the block is not a file. The order of the attributes for blocks correspond to the order of the blocks in the block table, and are of the same number. The attributes are stored in parallel arrays in the "(attributes)" file (default language and platform), in the archive. The attributes corresponding to this file need not be valid (and logically cannot be). Unlike all the other structures in the MoPaQ format, entries in the extended attributes are NOT guaranteed to be aligned. Also note that in some archives, malicious zeroing of the attributes has been observed, perhaps with the intent of breaking archive viewers. This file is structured as follows:
+</p>
+<pre>
+00h: int32 Version&nbsp;:           Specifies the extended attributes format version. For now, must be 100.
+04h: int32 AttributesPresent&nbsp;: Bit mask of the extended attributes present in the archive:
+	00000001h: File CRC32s.
+	00000002h: File timestamps.
+	00000004h: File MD5s.
+08h: int32(BlockTableEntries) CRC32s&nbsp;:   CRC32s of the (uncompressed) file data for each block in the archive. 
+                                         Omitted if the archive does not have CRC32s.
+FILETIME(BlockTableEntries) Timestamps&nbsp;: Timestamps for each block in the archive. The format is that of the 
+                                         Windows FILETIME structure. Omitted if the archive does not have timestamps.
+MD5(BlockTableEntries) MD5s&nbsp;:            MD5s of the (uncompressed) file data for each block in the archive. 
+                                         Omitted if the archive does not have MD5s.
+</pre>
+<a name="File_Data"></a><h3> <span class="mw-headline"> File Data </span></h3>
+<p>The data for each file is composed of the following structure:
+</p>
+<pre>
+int32(SectorsInFile* + 1) SectorOffsetTable  Offsets to the start of each sector, relative to the beginning 
+                                                  of the file data. The last entry contains the total compressed file 
+                                                  size, making it possible to easily calculate the size of any given
+                                                  sector by simple subtraction. This table is not present or necessary
+                                                  if the file is not compressed.
+SECTOR Sectors(SectorsInFile)                     Data of each sector in the file, packed end to end (see details below).
+</pre>
+<p>Normally, file data is split up into sectors, for simple streaming. All sectors, save for the last, will contain as many bytes of file data as specified in the archive header's SectorSizeShift; the last sector may contain less than this, depending on the size of the entire file's data. If the file is compressed or imploded, the sector will be smaller or the same size as the file data it contains. Individual sectors in a compressed or imploded file may be stored uncompressed; this occurs if and only if the file data the sector contains could not be compressed by the algorithm(s) used (if the compressed sector size was greater than or equal to the size of the file data), and is indicated by the sector's size in SectorOffsetTable being equal to the size of the file data in the sector (which may be calculated from the FileSize).
+</p><p>Sector checksums, when present, are stored as an additional sector at the end of the file, and such files consequently have an additional entry in the sector table; however, unlike the other sectors in the file, this sector is always compressed (not imploded) and unencrypted. This sector consists of an array of checksums, one for each sector in the file minus the checksum sector itself. Each checksum is computed from a compressed but unencrypted sector; for further details of the implementation of sector checksums, see VerifySectorChecksum below.
+</p><p>The format of each sector depends on the kind of sector it is. Uncompressed sectors are simply the the raw file data contained in the sector. Imploded sectors are the raw compressed data following compression with the implode algorithm (these sectors can only be in imploded files). Compressed sectors (only found in compressed - not imploded - files) are compressed with one or more compression algorithms, and have the following structure:
+</p>
+<pre>
+byte CompressionMask&nbsp;: Mask of the compression types applied to this sector.
+byte(SectorSize - 1) SectorData&nbsp;: The compressed data for the sector.
+</pre>
+<p>CompressionMask indicates which compression algorithm(s) to apply to the compressed sector. This byte counts towards the total sector size, and the sector will be stored uncompressed if the data cannot be compressed by at least two bytes; in other words, there must be an overall gain of at least one byte through compression. As well, this byte is encrypted with the sector data, if applicable. The following compression algorithms are defined (for implementations of these algorithms, see StormLib):
+</p>
+<pre>
+20h: Sparse compressed. Added in Starcraft 2.
+40h: IMA ADPCM mono
+80h: IMA ADPCM stereo
+01h: Huffman encoded
+02h: Deflated (see ZLib). Added in Warcraft 3.
+08h: Imploded (see PKWare Data Compression Library)
+10h: BZip2 compressed (see BZip2). Added in World of Warcraft: The Burning Crusade.
+</pre>
+<p>Prior to Starcraft 2, this byte is interpreted as a bit mask of algorithms to apply. Algorithms, which may be combined arbitrarily, are applied in the order entries are shown above during compression, and in the opposite order during decompression.
+</p><p>In Starcraft 2, this byte is now processed via a single large lookup table of values, which translates each possible value into either one or two different compression algorithms. Algorithms may no longer be arbitrarily combined, but must come from a list of valid combinations; specifically, most compression types (e.g. Deflate and Implode) are now mutually exclusive, and may only be combined with a small number of other algorithms (e.g. IMA ADPCM), which themselves are mutually exclusive. Furthermore, there is one exception (12h) where the value is not two algorithms combined, but a single, new algorithm (LZMA). The list of valid combinations:
+</p>
+<pre>
+12h: LZMA compression. Added in Starcraft 2.
+22h: Sparse compression + Deflate
+30h: Sparse compression + BZip2
+41h: Mono IMA ADPCM + Huffman encoding
+48h: Mono IMA ADPCM + Implode
+81h: Stereo IMA ADPCM + Huffman encoding
+88h: Stereo IMA ADPCM + Implode
+</pre>
+<p>If the file is stored as a single unit (indicated in the file's Flags), there is effectively only a single sector, which contains the entire file data.
+</p><p>If the file is encrypted, each sector (after compression/implosion, if applicable) is encrypted with the file's key. The base key for a file is determined by a hash of the file name stripped of the directory (i.e. the key for a file named "directory\file" would be computed as the hash of "file"). If this key is adjusted, as indicated in the file's Flags, the final key is calculated as ((base key + BlockOffset) XOR FileSize). Each sector is encrypted using the key + the 0-based index of the sector in the file. The SectorOffsetTable, if present, is encrypted using the key - 1.
+</p><p>The SectorOffsetTable is omitted when the sizes and offsets of all sectors in the file are calculatable from the FileSize. This can happen in several circumstances. If the file is not compressed/imploded, then the size and offset of all sectors is known, based on the archive's SectorSizeShift. If the file is stored as a single unit compressed/imploded, then the SectorOffsetTable is omitted, as the single file "sector" corresponds to BlockSize and FileSize, as mentioned previously. However, the SectorOffsetTable will be present if the file is compressed/imploded and the file is not stored as a single unit, even if there is only a single sector in the file (the size of the file is less than or equal to the archive's sector size).
+</p>
+<a name="Listfile"></a><h3> <span class="mw-headline"> Listfile </span></h3>
+<p>The listfile is a very simple extension to the MoPaQ format that contains the file paths of (most) files in the archive. The languages and platforms of the files are not stored in the listfile. The listfile is contained in the file "(listfile)" (default language and platform), and is simply a text file with file paths separated by ';', 0Dh, 0Ah, or some combination of these. The file "(listfile)" may not be listed in the listfile.
+</p>
+<a name="Weak_Digital_Signature"></a><h3> <span class="mw-headline"> Weak Digital Signature </span></h3>
+<p>The weak digital signature is a RSASSA-PKCS1-v1_5 digital signature, using the MD5 hashing algorithm and a 512-bit (weak) RSA key (for more information about this protocol, see the RSA Labs PKCS1 specification). The public key and exponent are stored in a resource in Storm, the private key is stored in a separate file, whose filename is passed to MPQAPI (the private key is not stored in MPQAPI). The signature is stored uncompressed, unencrypted in the file "(signature)" (default language and platform) in the archive. The archive is hashed from the beginning of the archive (ArchiveOffset in the containing file) to the end of the archive (the length indicated by ArchiveSize, or calculated in the Extended MoPaQ format); the signature file is added to the archive before signing, and the space occupied by the file is considered to be all binary 0s during signing/verification. This file is structured as follows:
+</p>
+<pre>
+00h: int32 Unknown&nbsp;: Must be 0.
+04h: int32 Unknown&nbsp;: Must be 0.
+08h: int512 Signature&nbsp;: The digital signature. Like all other numbers in the MoPaQ format, this is stored in little-endian order.
+</pre>
+<p>The structure of the signature, when decrypted, follows the RSASSA-PKCS1-v1_5 specification; this format is rather icky to work with (Quantam wrote a program to verify this signature using nothing but an MD5 function and huge integer functions; it wasn't pleasant), and best left to an encryption library, such as OpenSSL as shown below:
+</p>
+<pre>
+int mpq_verify_weak_signature(RSA *public_key, const unsigned char *signature, const unsigned char *digest) {
+    unsigned char reversed_signature[MPQ_WEAK_SIGNATURE_SIZE];
+    memcpy(reversed_signature, signature + 8, MPQ_WEAK_SIGNATURE_SIZE);
+    memrev(reversed_signature, MPQ_WEAK_SIGNATURE_SIZE);
+    
+    return RSA_verify(NID_md5, digest, MD5_DIGEST_LENGTH, reversed_signature, MPQ_WEAK_SIGNATURE_SIZE, public_key);
+}
+</pre>
+<p>MPQKit includes the weak signature public RSA key in PEM format since r73.
+</p>
+<a name="Strong_Digital_Signature_-_Generics"></a><h3> <span class="mw-headline"> Strong Digital Signature - Generics </span></h3>
+<p>The strong digital signature consists of a SHA-1 digest with extremely simple padding, encrypted using straight RSA encryption. All known Blizzard keys are 2048-bit (strong) RSA keys; a default key is stored in Storm. Obviously, any RSA key may be used; in fact, an archive signed with the default key has never been seen in the wild. The strong digital signature is stored immediately after the archive, in the containing file. The entire archive (ArchiveSize bytes, starting at ArchiveOffset in the containing file) is hashed as a single block (there is one known exception to that algorithm, see below). In addition, a signature tail may be appended to the SHA-1 digest before it is finalized; this can be any arbitrary blob of data. The signature has the following format:
+</p>
+<pre>
+00h: char(4) Magic&nbsp;: Indicates the presence of a digital signature. Must be &quot;NGIS&quot; (&quot;SIGN&quot; backwards).
+04h: int2048 Signature&nbsp;: The digital signature, stored in little-endian format.
+</pre>
+<p>When the Signature field is decrypted with the public key, and the resulting large integer is stored in little-endian order, it is structured as follows:
+</p>
+<pre>
+00h: byte Padding&nbsp;: Must be 0Bh.
+01h: byte(235) Padding&nbsp;: Must be BBh.
+ECh: byte(20) SHA-1&nbsp;: SHA-1 digest of the archive, in standard SHA-1 byte order.
+</pre>
+<a name="Strong_Digital_Signature_-_Specifics"></a><h3> <span class="mw-headline"> Strong Digital Signature - Specifics </span></h3>
+<p>This section aims at giving specific information about the usage of the various known Blizzard public keys, as well as known SHA-1 digest tails.
+</p><p><i>Warcraft 3 maps</i>
+</p><p>Warcraft 3 maps (.w3m and .w3x) are composed of a map header, followed by an MPQ archive at offset 512, followed by a strong digital signature. The Warcraft 3 Map key is used for Warcraft 3 map signatures; the SHA-1 digest is constructed from the content of the entire file, including the map header, up to the end of the archive. That is, (MapHeaderSize + ArchiveSize bytes, starting at 0 in the containing file). Once the map file has been digested, a tail is appended to the SHA-1 digest; the tail is the uppercased file name of the map.
+</p><p><i>World of Warcraft Macintosh patches</i>
+</p><p>World of Warcraft Macintosh patches are embodied by a patch program ("patcher"), which contains in its bundle resources a standalone.MPQ archive, which stores the patch's content. standalone.MPQ archives are signed with the World of Warcraft Macintosh Patch key; the SHA-1 digest is constructed normally as described in the general case. Once the archive has been digested, a tail is appended to the SHA-1 digest; the tail is "ARCHIVE".
+</p><p>It should be noted that World of Warcraft Windows patches are signed using the weak signature scheme.
+</p><p><i>World of Warcraft survey</i>
+</p><p>World of Warcraft stores a Survey.MPQ archive in its WDB directory. Survey.MPQ archives are signed with the World of Warcraft Survey key; the SHA-1 digest is constructed normally as described in the general case. Once the archive has been digested, a tail is appended to the SHA-1 digest; the tail is "ARCHIVE".
+</p><p>It should be noted that the Survey.MPQ archive has not yet been observed in publicly available builds of Burning Crusade.
+</p>
+<a name="User_Data"></a><h3> <span class="mw-headline"> User Data </span></h3>
+<p>The second version of the MoPaQ format, first used in Burning Crusade, features a mechanism to store some amount of data outside the archive proper, though the reason for this mechanism is not known. This is implemented by means of a shunt block that precedes the archive itself. The format of this block is as follows:
+</p>
+<pre>
+00h: char(4) Magic                  Indicates that this is a shunt block. ASCII &quot;MPQ&quot; 1Bh.
+04h: int32 UserDataSize             The number of bytes that have been allocated in this archive for user data. This does not
+                                    need to be the exact size of the data itself, but merely the maximum amount of data which
+                                    may be stored in this archive.
+08h: int32 ArchiveHeaderOffset      The offset in the file at which to continue the search for the archive header.
+0Ch: byte(UserDataSize) UserData    The block to store user data in.
+</pre>
+<p>When Storm encounters this block in its search for the archive header, it saves the location of the shunt block and resumes its search for the archive header at the offset specified in the shunt.
+</p><p>Blizzard-generated archives place the shunt at the beginning of the file, and begin the archive itself at the next 512-byte boundary after the end of the shunt block.
+</p>
+<a name="User_Data_File"></a><h4> <span class="mw-headline"> User Data File </span></h4>
+<p>Some archives, based on criteria that are not yet known, are unable to contain a shunt block. In this case, user data is stored in a normal file inside the archive named "(user data)".
+</p>
+<a name="Algorithm_Source_Code"></a><h2> <span class="mw-headline"> Algorithm Source Code </span></h2>
+<p>All of the sample code here assumes little endian machine byte order, that the short type is 16 bits, that the long type is 32 bits, and that the long long type is 64 bits. Adjustments must be made if these assumptions are not correct on a given platform. All code not credited otherwise was written by myself in the writing of this specification.
+</p>
+<a name="Encryption.2FDecryption"></a><h3> <span class="mw-headline"> Encryption/Decryption </span></h3>
+<p>Based on code from StormLib.
+</p>
+<pre>
+unsigned long dwCryptTable[0x500];
+
+// The encryption and hashing functions use a number table in their procedures. This table must be initialized before the functions are called the first time.
+void InitializeCryptTable()
+{
+    unsigned long seed   = 0x00100001;
+    unsigned long index1 = 0;
+    unsigned long index2 = 0;
+    int   i;
+
+    for (index1 = 0; index1 &lt; 0x100; index1++)
+    {
+        for (index2 = index1, i = 0; i &lt; 5; i++, index2 += 0x100)
+        {
+            unsigned long temp1, temp2;
+
+            seed  = (seed * 125 + 3)&nbsp;% 0x2AAAAB;
+            temp1 = (seed &amp; 0xFFFF) &lt;&lt; 0x10;
+
+            seed  = (seed * 125 + 3)&nbsp;% 0x2AAAAB;
+            temp2 = (seed &amp; 0xFFFF);
+
+            dwCryptTable[index2] = (temp1 | temp2);
+        }
+    }
+}
+
+void EncryptData(void *lpbyBuffer, unsigned long dwLength, unsigned long dwKey)
+{
+    assert(lpbyBuffer);
+
+    unsigned long *lpdwBuffer = (unsigned long *)lpbyBuffer;
+    unsigned long seed = 0xEEEEEEEE;
+    unsigned long ch;
+
+    dwLength /= sizeof(unsigned long);
+
+    while(dwLength-- &gt; 0)
+    {
+        seed += dwCryptTable[0x400 + (dwKey &amp; 0xFF)];
+        ch = *lpdwBuffer ^ (dwKey + seed);
+
+        dwKey = ((~dwKey &lt;&lt; 0x15) + 0x11111111) | (dwKey &gt;&gt; 0x0B);
+        seed = *lpdwBuffer + seed + (seed &lt;&lt; 5) + 3;
+
+		*lpdwBuffer++ = ch;
+    }
+}
+
+void DecryptData(void *lpbyBuffer, unsigned long dwLength, unsigned long dwKey)
+{
+    assert(lpbyBuffer);
+
+    unsigned long *lpdwBuffer = (unsigned long *)lpbyBuffer;
+    unsigned long seed = 0xEEEEEEEEL;
+    unsigned long ch;
+
+    dwLength /= sizeof(unsigned long);
+
+    while(dwLength-- &gt; 0)
+    {
+        seed += dwCryptTable[0x400 + (dwKey &amp; 0xFF)];
+        ch = *lpdwBuffer ^ (dwKey + seed);
+
+        dwKey = ((~dwKey &lt;&lt; 0x15) + 0x11111111L) | (dwKey &gt;&gt; 0x0B);
+        seed = ch + seed + (seed &lt;&lt; 5) + 3;
+
+		*lpdwBuffer++ = ch;
+    }
+}
+</pre>
+<a name="Hashing_And_File_Key_Computation"></a><h3> <span class="mw-headline"> Hashing And File Key Computation </span></h3>
+<p>These functions may have been derived from StormLib code at some point in the very distant past. It was so long ago that I don't remember for certain.
+</p>
+<pre>
+// Different types of hashes to make with HashString
+#define MPQ_HASH_TABLE_OFFSET	0
+#define MPQ_HASH_NAME_A	1
+#define MPQ_HASH_NAME_B	2
+#define MPQ_HASH_FILE_KEY	3
+
+// Based on code from StormLib.
+unsigned long HashString(const char *lpszString, unsigned long dwHashType)
+{
+    assert(lpszString);
+    assert(dwHashType &lt;= MPQ_HASH_FILE_KEY);
+    
+    unsigned long  seed1 = 0x7FED7FEDL;
+    unsigned long  seed2 = 0xEEEEEEEEL;
+    int    ch;
+
+    while (*lpszString&nbsp;!= 0)
+    {
+        ch = toupper(*lpszString++);
+
+        seed1 = dwCryptTable[(dwHashType * 0x100) + ch] ^ (seed1 + seed2);
+        seed2 = ch + seed1 + seed2 + (seed2 &lt;&lt; 5) + 3;
+    }
+    return seed1;
+}
+
+#define BLOCK_OFFSET_ADJUSTED_KEY 0x00020000L
+
+unsigned long ComputeFileKey(const char *lpszFilePath, const BlockTableEntry &amp;blockEntry, unsigned long nArchiveOffset)
+{
+	assert(lpszFilePath);
+	
+	// Find the file name part of the path
+	const char *lpszFileName = strrchr(lpszFilePath, '\\');
+	if (lpszFileName)
+		lpszFileName++;	// Skip the \
+	else
+		lpszFileName = lpszFilePath;
+		
+	// Hash the name to get the base key
+	unsigned long nFileKey = HashString(lpszFileName, MPQ_HASH_FILE_KEY);
+	
+	// Offset-adjust the key if necessary
+	if (blockEntry.Flags &amp; BLOCK_OFFSET_ADJUSTED_KEY)
+		nFileKey = (nFileKey + blockEntry.BlockOffset) ^ blockEntry.FileSize;
+		
+	return nFileKey;
+}
+</pre>
+<a name="Conversion_of_FILETIME_And_time_t"></a><h3> <span class="mw-headline"> Conversion of FILETIME And time_t </span></h3>
+<p>This code assumes that the base ("zero") date for time_t is 01/01/1970. This is true on Windows, Unix System V systems, and Mac OS X. It is unknown whether this is true on all other platforms. You'll need to research this yourself, if you plan on porting it somewhere else.
+</p><p><b>THIS CODE MAY BE INCORRECT, AND HAS NOT BEEN TESTED</b>
+</p>
+<pre>
+#define EPOCH_OFFSET 116444736000000000ULL	// Number of 100 ns units between 01/01/1601 and 01/01/1970
+
+bool GetTimeFromFileTime(const FILETIME &amp;fileTime, time_t &amp;time)
+{
+	// The FILETIME represents a 64-bit integer: the number of 100 ns units since January 1, 1601
+	unsigned long long nTime = ((unsigned long long)fileTime.dwHighDateTime &lt;&lt; 32) + fileTime.dwLowDateTime;
+
+	if (nTime &lt; EPOCH_OFFSET)
+		return false;
+
+	nTime -= EPOCH_OFFSET;	// Convert the time base from 01/01/1601 to 01/01/1970
+	nTime /= 10000000ULL;	// Convert 100 ns to sec
+
+	time = (time_t)nTime;
+
+	// Test for overflow (FILETIME is 64 bits, time_t is 32 bits)
+	if ((nTime - (unsigned long long)time) &gt; 0)
+		return false;
+
+	return true;
+}
+
+void GetFileTimeFromTime(const time_t &amp;time, FILETIME &amp;fileTime)
+{
+	unsigned long long nTime = (unsigned long long)time;
+
+	nTime *= 10000000ULL;
+	nTime += EPOCH_OFFSET;
+
+	fileTime.dwLowDateTime = (DWORD)nTime;
+	fileTime.dwHighDateTime = (DWORD)(nTime &gt;&gt; 32);
+}
+</pre>
+<a name="Conversion_of_FILETIME_And_NSDate"></a><h3> <span class="mw-headline"> Conversion of FILETIME And NSDate </span></h3>
+<p>MPQKit includes a  category on [<a href="http://developer.apple.com/documentation/Cocoa/Reference/Foundation/Classes/NSDate_Class/Reference/Reference.html" class="external text" title="http://developer.apple.com/documentation/Cocoa/Reference/Foundation/Classes/NSDate_Class/Reference/Reference.html" rel="nofollow">NSDate</a>] to convert to and from NTFS FILETIME, and has been properly tested for correctness.
+</p>
+<a name="Forming_a_64-Bit_Large_Archive_Offset_From_32-Bit_And_16-Bit_Components"></a><h3> <span class="mw-headline"> Forming a 64-Bit Large Archive Offset From 32-Bit And 16-Bit Components </span></h3>
+<pre>
+unsigned long long MakeLargeArchiveOffset(unsigned long nOffsetLow, unsigned short nOffsetHigh)
+{
+	return ((unsigned long long)nOffsetHigh &lt;&lt; 32) + (unsigned long long)nOffsetLow;
+}
+</pre>
+<a name="Verifying_a_Sector_Checksum"></a><h3> <span class="mw-headline"> Verifying a Sector Checksum </span></h3>
+<pre>
+bool VerifySectorChecksum(const void *buffer, unsigned int length, unsigned long checksum)
+{
+	if (checksum == 0)
+		return true;	// Ignore the actual checksum
+
+	unsigned long bufferChecksum = adler32(0, buffer, length);
+	if (bufferChecksum == 0)
+		// Can't deal with a 0 checksum
+		bufferChecksum = (unsigned long)-1;
+
+	return (bufferChecksum == checksum);
+}
+</pre>
+<a name="Finding_Files"></a><h3> <span class="mw-headline"> Finding Files </span></h3>
+<pre>
+#define MPQ_HASH_ENTRY_EMPTY 0xFFFFFFFFL
+#define MPQ_HASH_ENTRY_DELETED 0xFFFFFFFEL
+
+bool FindFileInHashTable(const HashTableEntry *lpHashTable, unsigned long nHashTableSize, const char *lpszFilePath, unsigned short nLang, unsigned char nPlatform, unsigned long &amp;iFileHashEntry)
+{
+	assert(lpHashTable);
+	assert(nHashTableSize);
+	assert(lpszFilePath);
+	
+	// Find the home entry in the hash table for the file
+	unsigned long iInitEntry = HashString(lpszFilePath, MPQ_HASH_TABLE_OFFSET) &amp; (nHashTableSize - 1);
+		
+	// Is there anything there at all?
+	if (lpHashTable[iInitEntry].FileBlockIndex == MPQ_HASH_ENTRY_EMPTY)
+		return false;
+		
+	// Compute the hashes to compare the hash table entry against
+	unsigned long nNameHashA = HashString(lpszFilePath, MPQ_HASH_NAME_A),
+		nNameHashB = HashString(lpszFilePath, MPQ_HASH_NAME_B),
+		iCurEntry = iInitEntry;
+		
+	// Check each entry in the hash table till a termination point is reached
+	do
+	{
+		if (lpHashTable[iCurEntry].FileBlockIndex&nbsp;!= MPQ_HASH_ENTRY_DELETED)
+		{
+			if (lpHashTable[iCurEntry].FilePathHashA == nNameHashA 
+				&amp;&amp; lpHashTable[iCurEntry].FilePathHashB == nNameHashB
+				&amp;&amp; lpHashTable[iCurEntry].Language == nLang
+				&amp;&amp; lpHashTable[iCurEntry].Platform == nPlatform)
+			{
+				iFileHashEntry = iCurEntry;
+				
+				return true;
+			}
+		}
+			
+		iCurEntry = (iCurEntry + 1) &amp; (nHashTableSize - 1);
+	} while (iCurEntry&nbsp;!= iInitEntry &amp;&amp; lpHashTable[iCurEntry].FileBlockIndex&nbsp;!= MPQ_HASH_ENTRY_EMPTY);
+	
+	return false;
+}
+</pre>
+<a name="Deleting_Files"></a><h3> <span class="mw-headline"> Deleting Files </span></h3>
+<pre>
+bool DeleteFile(HashTableEntry *lpHashTable, unsigned long nHashTableSize, BlockTableEntry *lpBlockTable, const char *lpszFilePath, unsigned short nLang, unsigned char nPlatform)
+{
+	assert(lpHashTable);
+	assert(nHashTableSize);
+	assert(lpBlockTable);
+	
+	// Find the file in the hash table
+	unsigned long iFileHashEntry;
+	
+	if (!FindFileInHashTable(lpHashTable, nHashTableSize, lpszFilePath, nLang, nPlatform, iFileHashEntry))
+		return false;
+	
+	// Get the block table index before we nuke the hash table entry
+	unsigned long iFileBlockEntry = lpHashTable[iFileHashEntry].FileBlockIndex;
+	
+	// Delete the file's entry in the hash table
+	memset(&amp;lpHashTable[iFileHashEntry], 0xFF, sizeof(HashTableEntry));
+	
+	// If the next entry is empty, mark this one as empty; otherwise, mark this as deleted.
+	if (lpHashTable[(iFileHashEntry + 1) &amp; (nHashTableSize - 1)].FileBlockIndex == MPQ_HASH_ENTRY_EMPTY)
+		lpHashTable[iFileHashEntry].FileBlockIndex = MPQ_HASH_ENTRY_EMPTY;
+	else
+		lpHashTable[iFileHashEntry].FileBlockIndex = MPQ_HASH_ENTRY_DELETED;
+	
+	// If the block occupies space, mark the block as free space; otherwise, clear the block table entry.
+	if (lpBlockTable[iFileBlockEntry].BlockSize &gt; 0)
+	{
+		lpBlockTable[iFileBlockEntry].FileSize = 0;
+		lpBlockTable[iFileBlockEntry].Flags = 0;
+	}
+	else
+		memset(&amp;lpBlockTable[iFileBlockEntry], 0, sizeof(BlockTableEntry);
+		
+	return true;
+}
+</pre>
+<a name="Constants"></a><h2> <span class="mw-headline"> Constants </span></h2>
+<a name="Locales"></a><h3> <span class="mw-headline"> Locales </span></h3>
+<pre>
+    MPQNeutral      = 0,
+    MPQChinese      = 0x404,
+    MPQCzech        = 0x405,
+    MPQGerman       = 0x407,
+    MPQEnglish      = 0x409,
+    MPQSpanish      = 0x40a,
+    MPQFrench       = 0x40c,
+    MPQItalian      = 0x410,
+    MPQJapanese     = 0x411,
+    MPQKorean       = 0x412,
+    MPQDutch        = 0x413,
+    MPQPolish       = 0x415,
+    MPQPortuguese   = 0x416,
+    MPQRusssian     = 0x419,
+    MPQEnglishUK    = 0x809
+</pre>
+
+<!-- 
+NewPP limit report
+Preprocessor node count: 90/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key devklog_wiki:pcache:idhash:4-0!1!0!!en!2!edit=0 and timestamp 20111018194446 -->
+<div class="printfooter">
+Retrieved from "<a href="http://wiki.devklog.net/index.php?title=The_MoPaQ_Archive_Format">http://wiki.devklog.net/index.php?title=The_MoPaQ_Archive_Format</a>"</div>
+						<!-- end content -->
+			<div class="visualClear"></div>
+		</div>
+	</div>
+		</div>
+		<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+	
+				 <li id="ca-nstab-main" class="selected"><a href="/index.php?title=The_MoPaQ_Archive_Format" title="View the content page [c]" accesskey="c">Page</a></li>
+				 <li id="ca-talk" class="new"><a href="/index.php?title=Talk:The_MoPaQ_Archive_Format&amp;action=edit" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				 <li id="ca-viewsource"><a href="/index.php?title=The_MoPaQ_Archive_Format&amp;action=edit" title="This page is protected.&#10;You can view its source. [e]" accesskey="e">View source</a></li>
+				 <li id="ca-history"><a href="/index.php?title=The_MoPaQ_Archive_Format&amp;action=history" title="Past versions of this page. [h]" accesskey="h">History</a></li>			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-login"><a href="/index.php?title=Special:UserLogin&amp;returnto=The_MoPaQ_Archive_Format" title="You are encouraged to log in, it is not mandatory however. [o]" accesskey="o">Log in / create account</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+		<a style="background-image: url(/skins/common/images/wiki.png);" href="/index.php?title=Main_Page" title="Visit the Main Page [z]" accesskey="z"></a>
+	</div>
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class='generated-sidebar portlet' id='p-navigation'>
+		<h5>Navigation</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="/index.php?title=Main_Page">Main Page</a></li>
+				<li id="n-portal"><a href="/index.php?title=/dev/klog_Wiki:Community_Portal" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="/index.php?title=/dev/klog_Wiki:Current_events" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="/index.php?title=Special:RecentChanges" title="The list of recent changes in the wiki. [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="/index.php?title=Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="http://meta.wikimedia.org/wiki/Help:Contents" title="The place to find out.">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/index.php?title=Special:Search" id="searchform"><div>
+				<input id="searchInput" name="search" type="text" title="Search /dev/klog Wiki [f]" accesskey="f" value="" />
+				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Go" title="Go to a page with this exact name if exists" />&nbsp;
+				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Search" title="Search the pages for this text" />
+			</div></form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="/index.php?title=Special:WhatLinksHere/The_MoPaQ_Archive_Format" title="List of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="/index.php?title=Special:RecentChangesLinked/The_MoPaQ_Archive_Format" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+<li id="t-specialpages"><a href="/index.php?title=Special:SpecialPages" title="List of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="/index.php?title=The_MoPaQ_Archive_Format&amp;printable=yes&amp;printable=yes" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>				<li id="t-permalink"><a href="/index.php?title=The_MoPaQ_Archive_Format&amp;oldid=420" title="Permanent link to this version of the page">Permanent link</a></li>			</ul>
+		</div>
+	</div>
+		</div><!-- end of the left (by default at least) column -->
+			<div class="visualClear"></div>
+			<div id="footer">
+				<div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" /></a></div>
+				<div id="f-copyrightico"><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" alt='Attribution-Noncommercial-Share Alike 3.0 Unported' /></a></div>
+			<ul id="f-list">
+				<li id="lastmod"> This page was last modified on 25 November 2010, at 19:58.</li>
+				<li id="viewcount">This page has been accessed 19,543 times.</li>
+				<li id="copyright">Content is available under <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" class="external " title="http://creativecommons.org/licenses/by-nc-sa/3.0/" rel="nofollow">Attribution-Noncommercial-Share Alike 3.0 Unported</a>.</li>
+				<li id="privacy"><a href="/index.php?title=/dev/klog_Wiki:Privacy_policy" title="/dev/klog Wiki:Privacy policy">Privacy policy</a></li>
+				<li id="about"><a href="/index.php?title=/dev/klog_Wiki:About" title="/dev/klog Wiki:About">About /dev/klog Wiki</a></li>
+				<li id="disclaimer"><a href="/index.php?title=/dev/klog_Wiki:General_disclaimer" title="/dev/klog Wiki:General disclaimer">Disclaimers</a></li>
+			</ul>
+		</div>
+</div>
+
+		<script type="text/javascript">if (window.runOnloadHook) runOnloadHook();</script>
+<!-- Served in 0.262 secs. --></body></html>
