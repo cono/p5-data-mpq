@@ -3,7 +3,7 @@ package MPQ::Crypt;
 use strict;
 use warnings;
 
-use MPQ::Constants qw/ KEY_HASH_TABLE KEY_BLOCK_TABLE DECRYPT_BLOCK_OFFSET/;
+use MPQ::Constants qw/ KEY_HASH_TABLE KEY_BLOCK_TABLE CRYPT_OFFSET_DECRYPT_TABLE /;
 
 sub CRYPT_BUFFER_SIZE() { 0x500 }
 sub INIT_SEED()         { 0x00100001 }
@@ -68,7 +68,7 @@ sub decrypt_table {
 
     while ($length--) {
         my $word = $file->read_int32;
-        $seed2 = _to_dword( $seed2 + $self->{'_buffer'}->[DECRYPT_BLOCK_OFFSET + ($seed1 & 0xFF)]);
+        $seed2 = _to_dword( $seed2 + $self->{'_buffer'}->[CRYPT_OFFSET_DECRYPT_TABLE + ($seed1 & 0xFF)]);
         $temp = $word ^ _to_dword( $seed1 + $seed2 );
 
         $seed1 = _to_dword( ((~$seed1 << 0x15) + 0x1111_1111) | ($seed1 >> 0x0B) );

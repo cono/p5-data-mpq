@@ -20,22 +20,23 @@ sub parse {
     $self->{'file'}->seek($self->{'offset'});
     $self->do_magic;
 
-    $self->{'_header'} = MPQ::Archive::Header->new(
+    my $header = $self->{'_header'} = MPQ::Archive::Header->new(
         file   => $self->{'file'},
         offset => $self->{'file'}->tell
     );
-    $self->{'_header'}->parse;
+    $header->parse;
 
     $self->{'_hash_table'} = MPQ::Archive::HashTable->new(
-        file   => $self->{'file'},
-        offset => $self->{'_header'}->hash_table_offset + $self->{'offset'}
+        file    => $self->{'file'},
+        offset  => $header->hash_table_offset + $self->{'offset'},
+        entries => $header->hash_table_entries
     );
     $self->{'_hash_table'}->parse;
 
     $self->{'_block_table'} = MPQ::Archive::BlockTable->new(
         file    => $self->{'file'},
-        offset  => $self->{'_header'}->block_table_offset + $self->{'offset'},
-        entries => $self->{'_header'}->block_table_entries
+        offset  => $header->block_table_offset + $self->{'offset'},
+        entries => $header->block_table_entries
     );
     $self->{'_block_table'}->parse;
 }
