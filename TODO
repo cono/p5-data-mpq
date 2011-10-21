@@ -1,0 +1,3 @@
+* Add support of compressed Hash Table
+* Add fully support version 2+ of Archives (extended tables and so on)
+* Move to C XS
