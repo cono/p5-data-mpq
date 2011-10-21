@@ -59,6 +59,12 @@ sub slurp {
     return $content;
 }
 
+sub DESTROY {
+    my $self = shift;
+
+    unlink($self->{'_filename'});
+}
+
 1;
 
 =head1 AUTHOR

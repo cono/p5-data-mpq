@@ -10,7 +10,9 @@ sub new {
 }
 
 sub process {
-    die ref($_[0]) ."::process need to be implemented";
+    my ($self, $filename) = @_;
+
+    unlink($filename);
 }
 
 1;

@@ -12,7 +12,10 @@ sub process {
     my $self = shift;
     my $type = "_$self->{'type'}";
 
-    $self->$type(@_);
+    my $result = $self->$type(@_);
+    $self->SUPER::process(@_);
+
+    return $result;
 }
 
 sub _bunzip2 {
