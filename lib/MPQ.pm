@@ -8,6 +8,8 @@ use MPQ::Constants;
 use MPQ::Archive;
 use MPQ::Shunt;
 
+our $VERSION = '0.01';
+
 sub new {
     my ($class, %param) = @_;
 
