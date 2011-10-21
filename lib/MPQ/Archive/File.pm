@@ -62,7 +62,7 @@ sub slurp {
 sub DESTROY {
     my $self = shift;
 
-    unlink($self->{'_filename'});
+    unlink($self->{'_filename'}) if $self->{'_filename'} && -e $self->{'_filename'};
 }
 
 1;
