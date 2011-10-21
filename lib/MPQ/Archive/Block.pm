@@ -57,6 +57,9 @@ sub is_compress {
     $_[0]->{'flags'} & FLAG_COMPRESS ? 1 : 0;
 }
 
+sub offset { $_[0]->{'offset'} }
+sub size   { $_[0]->{'size'} }
+
 # For debug
 sub dump {
     my $self = shift;

@@ -18,7 +18,7 @@ sub new {
 sub parse {
     my $self = shift;
 
-    $self->{'file'}->seek($self->{'offset'});
+    $self->{'file'}->seek($self->{'offset'} + $self->{'archive_offset'});
     {
         my $buf = $self->{'_crypt'}->decrypt_block_table(
             $self->{'file'},
@@ -28,13 +28,19 @@ sub parse {
         my $table = $self->{'_table'};
         for (my $i = 0; $i < $self->{'entries'}; $i++) {
             push @$table, MPQ::Archive::Block->new(
-                offset    => $buf->[$i * 4],
+                offset    => $buf->[$i * 4] + $self->{'archive_offset'},
                 size      => $buf->[$i * 4 + 1],
                 file_size => $buf->[$i * 4 + 2],
                 flags     => $buf->[$i * 4 + 3]
             );
         }
     }
+}
+
+sub get_block {
+    my ($self, $block_id) = @_;
+
+    return $self->{'_table'}->[$block_id];
 }
 
 # For debug
