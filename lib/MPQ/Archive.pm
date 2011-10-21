@@ -48,26 +48,38 @@ sub list_file {
     my $self = shift;
 
     unless (exists $self->{'_file_table'}) {
-        my $hash_entry = $self->{'_hash_table'}->find_hash_entry('(listfile)', 'Neutral', 0);
-        die "Could not find (listfile) file" unless defined $hash_entry;
+        my $file = $self->file('(listfile)', 'Neutral', 0);
+        die "Could not find (listfile) file" unless defined $file;
 
-        my $block = $self->{'_block_table'}->get_block($hash_entry->file_block_index);
-        my $file = MPQ::Archive::File->new(
-            file           => $self->{'file'},
-            archive_header => $self->{'_header'},
-            hash_entry     => $hash_entry,
-            block          => $block
-        );
-        $file->extract;
-        my $content = $file->slurp;
-
-        $self->{'_file_table'} = {
-            '(listfile)' => $file,
-            map {$_ => undef} split /[\n\r;]/, $content
-        };
+        my $ft = $self->{'_file_table'};
+        for my $f ( split /[\n\r;]/, $file->slurp ) {
+            $ft->{$f} = undef unless exists $ft->{$f};
+        }
     }
 
     return keys %{$self->{'_file_table'}};
+}
+
+sub file {
+    my ($self, $filename, $language, $platform) = @_;
+
+    if (exists $self->{'_file_table'} && defined $self->{'_file_table'}->{$filename}) {
+        return $self->{'_file_table'}->{$filename};
+    }
+
+    my $hash_entry = $self->{'_hash_table'}->find_hash_entry($filename, $language, $platform);
+    return undef unless defined $hash_entry;
+
+    my $block = $self->{'_block_table'}->get_block($hash_entry->file_block_index);
+    $self->{'_file_table'}->{$filename} = MPQ::Archive::File->new(
+        file           => $self->{'file'},
+        archive_header => $self->{'_header'},
+        hash_entry     => $hash_entry,
+        block          => $block
+    );
+    $self->{'_file_table'}->{$filename}->extract;
+
+    return $self->{'_file_table'}->{$filename};
 }
 
 sub header { $_[0]->{'_header'} }
