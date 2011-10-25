@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 our @EXPORT_OK = qw/
+    IS_OVERFLOW
     MAGIC ARCHIVE_TYPE SHUNT_TYPE
     KEY_HASH_TABLE KEY_BLOCK_TABLE
     CRYPT_OFFSET_HASH_BUCKET  CRYPT_OFFSET_HASH_NAME_A  CRYPT_OFFSET_HASH_NAME_B
@@ -23,6 +24,8 @@ sub import {
         *$dest = *$src;
     }
 }
+
+sub IS_OVERFLOW()  { 4294967296 & 1 }
 
 sub MAGIC()        { 'MPQ' }
 sub ARCHIVE_TYPE() { "\x1a" }
