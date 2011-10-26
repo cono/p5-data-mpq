@@ -34,7 +34,7 @@ use MPQ::Constants;
 use MPQ::Archive;
 use MPQ::Shunt;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head2 new
 
