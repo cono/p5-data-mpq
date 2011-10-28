@@ -67,7 +67,7 @@ sub find_hash_entry {
         }
 
         $entry_index++;
-        if ($entry_index = $self->{'entries'}) {
+        if ($entry_index == $self->{'entries'}) {
             $entry_index = 0;
         }
     } while ($entry_index != $first_entry);
