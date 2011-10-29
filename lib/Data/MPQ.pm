@@ -34,7 +34,7 @@ use Data::MPQ::Constants qw/MAGIC ARCHIVE_TYPE SHUNT_TYPE/;
 use Data::MPQ::Archive;
 use Data::MPQ::Shunt;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head2 new
 
