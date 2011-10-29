@@ -5,6 +5,6 @@ use warnings;
 
 use Test::More tests => 2;
 
-BEGIN { use_ok('MPQ::Archive::HashEntry'); }
-my $entry = new_ok('MPQ::Archive::HashEntry');
+BEGIN { use_ok('Data::MPQ::Archive::HashEntry'); }
+my $entry = new_ok('Data::MPQ::Archive::HashEntry');
 

@@ -1,4 +1,4 @@
-package MPQ::Archive::Block;
+package Data::MPQ::Archive::Block;
 
 use strict;
 use warnings;

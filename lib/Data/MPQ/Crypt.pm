@@ -1,11 +1,11 @@
-package MPQ::Crypt;
+package Data::MPQ::Crypt;
 
 use strict;
 use warnings;
 
 use Math::BigInt try => 'GMP';
 
-use MPQ::Constants qw/
+use Data::MPQ::Constants qw/
     IS_OVERFLOW KEY_HASH_TABLE KEY_BLOCK_TABLE CRYPT_OFFSET_DECRYPT_TABLE
 /;
 

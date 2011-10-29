@@ -5,6 +5,6 @@ use warnings;
 
 use Test::More tests => 2;
 
-BEGIN { use_ok('MPQ::Shunt'); }
-my $shunt = new_ok('MPQ::Shunt');
+BEGIN { use_ok('Data::MPQ::Shunt'); }
+my $shunt = new_ok('Data::MPQ::Shunt');
 

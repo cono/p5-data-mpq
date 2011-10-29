@@ -1,4 +1,4 @@
-package MPQ::Archive::File::Filter;
+package Data::MPQ::Archive::File::Filter;
 
 use strict;
 use warnings;

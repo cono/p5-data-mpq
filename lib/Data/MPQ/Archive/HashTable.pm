@@ -1,10 +1,37 @@
-package MPQ::Archive::HashTable;
+package Data::MPQ::Archive::HashTable;
+
+=head1 NAME
+
+Data::MPQ::Archive::HashTable - Perl module to work with MPQ archive hash table
+
+=head1 SYNOPSIS
+
+    use Data::MPQ;
+    use Data::MPQ::Constants qw(DEFAULT_LANGUAGE DEFAULT_PLATFORM);
+
+    my $mpq = Data::MPQ->new(filename => 'my_game.sc2replay');
+    $mpq->parse;
+
+    my $archive = $mpq->archive;
+
+    print $archive->
+        hash_table->
+        find_hash_entry('(listfile)', DEFAULT_LANGUAGE, DEFAULT_PLATFORM)->
+        file_block_index;
+
+=head1 DESCRIPTION
+
+This module parse and give you an access to MPQ hash table
+
+=head1 METHODS
+
+=cut
 
 use strict;
 use warnings;
 
-use MPQ::Archive::HashEntry;
-use MPQ::Constants qw/CRYPT_OFFSET_HASH_BUCKET/;
+use Data::MPQ::Archive::HashEntry;
+use Data::MPQ::Constants qw/CRYPT_OFFSET_HASH_BUCKET/;
 
 sub HASH_ENTRY_FREE() { 0xFFFF_FFFF }
 sub HASH_ENTRY_DEL()  { 0xFFFF_FFFE }
@@ -12,7 +39,7 @@ sub HASH_ENTRY_DEL()  { 0xFFFF_FFFE }
 sub new {
     my ($class, %param) = @_;
 
-    $param{'_crypt'} = new MPQ::Crypt;
+    $param{'_crypt'} = new Data::MPQ::Crypt;
     $param{'_table'} = [];
 
     return bless(\%param, $class);
@@ -35,7 +62,7 @@ sub parse {
             my $platform = $buf->[$i * 4 + 2] & 0x0000_FF00;
             $platform >>= 8;
 
-            push @$table, MPQ::Archive::HashEntry->new(
+            push @$table, Data::MPQ::Archive::HashEntry->new(
                 file_path_hash_a => $buf->[$i * 4],
                 file_path_hash_b => $buf->[$i * 4 + 1],
                 language         => $language,
@@ -92,6 +119,8 @@ sub dump {
 1;
 
 =head1 AUTHOR
+
+cono C<q@cono.org.ua>
 
 C corporation (c)
 

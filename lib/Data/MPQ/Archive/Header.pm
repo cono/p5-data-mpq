@@ -1,4 +1,27 @@
-package MPQ::Archive::Header;
+package Data::MPQ::Archive::Header;
+
+=head1 NAME
+
+Data::MPQ::Archive::Header - Perl module to work with MPQ archive header
+
+=head1 SYNOPSIS
+
+    use Data::MPQ;
+
+    my $mpq = Data::MPQ->new(filename => 'my_game.sc2replay');
+    $mpq->parse;
+
+    my $archive = $mpq->archive;
+
+    print $archive->header->format_version;
+
+=head1 DESCRIPTION
+
+This module parse and give you an access to MPQ archive header structure
+
+=head1 METHODS
+
+=cut
 
 use strict;
 use warnings;
@@ -76,6 +99,8 @@ sub block_table_offset_high { $_[0]->{'_block_table_offset_high'} }
 1;
 
 =head1 AUTHOR
+
+cono C<q@cono.org.ua>
 
 C corporation (c)
 

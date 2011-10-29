@@ -1,7 +1,9 @@
-package MPQ::Constants;
+package Data::MPQ::Constants;
 
 use strict;
 use warnings;
+
+our @EXPORT = qw//;
 
 our @EXPORT_OK = qw/
     IS_OVERFLOW
@@ -9,16 +11,19 @@ our @EXPORT_OK = qw/
     KEY_HASH_TABLE KEY_BLOCK_TABLE
     CRYPT_OFFSET_HASH_BUCKET  CRYPT_OFFSET_HASH_NAME_A  CRYPT_OFFSET_HASH_NAME_B
     CRYPT_OFFSET_HASH_FILE_KEY CRYPT_OFFSET_DECRYPT_TABLE
+    DEFAULT_LANGUAGE DEFAULT_PLATFORM
 /;
 
 sub import {
+    shift;
     my $caller = caller;
     my $pkg    = __PACKAGE__;
 
     no strict 'refs';
     no warnings 'redefine';
 
-    for my $c (@EXPORT_OK) {
+    my @export = (@EXPORT, @_);
+    for my $c (@export) {
         my $dest = $caller .'::'. $c;
         my $src  = __PACKAGE__ .'::'. $c;
         *$dest = *$src;
@@ -40,9 +45,14 @@ sub CRYPT_OFFSET_HASH_NAME_B()   { 0x200 }
 sub CRYPT_OFFSET_HASH_FILE_KEY() { 0x300 }
 sub CRYPT_OFFSET_DECRYPT_TABLE() { 0x400 }
 
+sub DEFAULT_LANGUAGE() { 'Neutral' }
+sub DEFAULT_PLATFORM() { 0 }
+
 1;
 
 =head1 AUTHOR
+
+cono C<q@cono.org.ua>
 
 C corporation (c)
 

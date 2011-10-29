@@ -1,14 +1,14 @@
-package MPQ;
+package Data::MPQ;
 
 =head1 NAME
 
-MPQ - Perl module to parse MoPaQ Archive Format
+Data::MPQ - Perl module to parse MoPaQ Archive Format
 
 =head1 SYNOPSIS
 
-    use MPQ;
+    use Data::MPQ;
 
-    my $mpq = MPQ->new(filename => 'my_game.sc2replay');
+    my $mpq = Data::MPQ->new(filename => 'my_game.sc2replay');
     $mpq->parse;
 
     my $archive = $mpq->archive;
@@ -29,16 +29,16 @@ games.
 use strict;
 use warnings;
 
-use MPQ::File;
-use MPQ::Constants;
-use MPQ::Archive;
-use MPQ::Shunt;
+use Data::MPQ::File;
+use Data::MPQ::Constants qw/MAGIC ARCHIVE_TYPE SHUNT_TYPE/;
+use Data::MPQ::Archive;
+use Data::MPQ::Shunt;
 
 our $VERSION = '0.02';
 
 =head2 new
 
-Constructor for the MPQ class. Has only one input parameter:
+Constructor for the Data::MPQ class. Has only one input parameter:
 
     filename - path to the mpq archive file
 
@@ -47,7 +47,7 @@ Constructor for the MPQ class. Has only one input parameter:
 sub new {
     my ($class, %param) = @_;
 
-    $param{'_file'} = MPQ::File->new(
+    $param{'_file'} = Data::MPQ::File->new(
         filename => $param{'filename'}
     );
 
@@ -74,17 +74,17 @@ sub _recognize_type {
     my $str = $self->{'_file'}->read_str(1);
 
     if ($str eq ARCHIVE_TYPE) {
-        $self->{'_archive'} = MPQ::Archive->new(
+        $self->{'_archive'} = Data::MPQ::Archive->new(
             offset => 0x4,
             file   => $self->{'_file'}
         );
     } elsif ($str eq SHUNT_TYPE) {
-        $self->{'_shunt'} = MPQ::Shunt->new(
+        $self->{'_shunt'} = Data::MPQ::Shunt->new(
             offset => 0x4,
             file   => $self->{'_file'}
         );
         $self->{'_shunt'}->parse;
-        $self->{'_archive'} = MPQ::Archive->new(
+        $self->{'_archive'} = Data::MPQ::Archive->new(
             offset => $self->{'_shunt'}->archive_header_offset,
             file   => $self->{'_file'}
         );
@@ -105,7 +105,7 @@ sub _do_magic {
 
 =head2 shunt
 
-Accessor to the L<MPQ::Shunt> object (could be without it)
+Accessor to the L<Data::MPQ::Shunt> object (could be without it)
 
 =cut
 
@@ -113,7 +113,7 @@ sub shunt { $_[0]->{'_shunt'} }
 
 =head2 archive
 
-Accessor to the L<MPQ::Archive> object - heart of the MPQ file.
+Accessor to the L<Data::MPQ::Archive> object - heart of the MPQ file.
 
 =cut
 

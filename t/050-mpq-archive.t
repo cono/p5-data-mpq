@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More tests => 2;
 
-BEGIN { use_ok('MPQ::Archive'); }
-my $archive = new_ok('MPQ::Archive');
+BEGIN { use_ok('Data::MPQ::Archive'); }
+my $archive = new_ok('Data::MPQ::Archive');
 
 

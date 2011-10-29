@@ -1,4 +1,4 @@
-package MPQ::File;
+package Data::MPQ::File;
 
 use strict;
 use warnings;

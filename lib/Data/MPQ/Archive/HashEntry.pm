@@ -1,10 +1,10 @@
-package MPQ::Archive::HashEntry;
+package Data::MPQ::Archive::HashEntry;
 
 use strict;
 use warnings;
 
-use MPQ::Crypt;
-use MPQ::Constants qw/CRYPT_OFFSET_HASH_NAME_A CRYPT_OFFSET_HASH_NAME_B/;
+use Data::MPQ::Crypt;
+use Data::MPQ::Constants qw/CRYPT_OFFSET_HASH_NAME_A CRYPT_OFFSET_HASH_NAME_B/;
 
 my $language_id2name = {
     0x000 => 'Neutral',
@@ -28,7 +28,7 @@ my $language_name2id = { };
 sub new {
     my ($class, %param) = @_;
 
-    $param{'_crypt'} = new MPQ::Crypt;
+    $param{'_crypt'} = new Data::MPQ::Crypt;
     # fill $language_name2id hash
     while (my ($k, $v) = each %$language_id2name) {
         $language_name2id->{$v} = $k;

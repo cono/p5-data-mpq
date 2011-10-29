@@ -1,4 +1,4 @@
-package MPQ::Archive::File::Uncompress;
+package Data::MPQ::Archive::File::Uncompress;
 
 use strict;
 use warnings;
@@ -6,7 +6,7 @@ use warnings;
 use File::Temp qw/tempfile/;
 use IO::Uncompress::Bunzip2 qw/bunzip2 $Bunzip2Error/;
 
-use base 'MPQ::Archive::File::Filter';
+use base 'Data::MPQ::Archive::File::Filter';
 
 sub process {
     my $self = shift;
